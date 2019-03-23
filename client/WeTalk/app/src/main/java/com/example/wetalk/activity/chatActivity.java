@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,8 @@ public class chatActivity extends AppCompatActivity {
     private MsgAdapter adapter;
     private TextView friendsTextView;
     private String friendsName;
+    private int friendID;
+    private int userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,9 @@ public class chatActivity extends AppCompatActivity {
     private void initIDInfo(){
         SharedPreferences pref=getSharedPreferences("chatInfo",MODE_PRIVATE);
         friendsName=pref.getString("friendName","");
+        friendID=pref.getInt("friendsID",0);
+        userID=pref.getInt("userID",0);
+        Log.d("userID", "userID : " + userID);
     }
 
     private void initMsgs(){

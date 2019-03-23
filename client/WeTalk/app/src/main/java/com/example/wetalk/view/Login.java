@@ -1,6 +1,7 @@
 package com.example.wetalk.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,8 +44,13 @@ public class Login extends AppCompatActivity {
                 int userID = Integer.parseInt(log_userID.getText().toString());
                 String password = log_passoword.getText().toString();
                 if(login(userID,password)){
+                    SharedPreferences.Editor editor=getSharedPreferences("chatInfo",MODE_PRIVATE).edit();
+                    editor.putInt("userID",userID);
+                    editor.apply();
                     Intent intent=new Intent(Login.this,MainActivity.class);
                     startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Login failed, please try again!!",Toast.LENGTH_SHORT).show();
                 }
             }
         });

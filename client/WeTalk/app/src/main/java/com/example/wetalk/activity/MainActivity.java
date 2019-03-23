@@ -197,6 +197,7 @@ public class MainActivity extends Activity implements
                         //聊天ID信息存储
                         SharedPreferences.Editor editor=getSharedPreferences("chatInfo",MODE_PRIVATE).edit();
                         editor.putString("friendName",friends.getName());
+                        editor.putInt("friendID",friends.getFriendID());
                         editor.apply();
                         //打开聊天界面
                         Intent intent=new Intent(MainActivity.this,chatActivity.class);
@@ -232,13 +233,13 @@ public class MainActivity extends Activity implements
     //初始化朋友
     private void initFriends(){
         for(int i=0;i<4;i++){
-            Friends fA=new Friends("A",R.drawable.tx);
+            Friends fA=new Friends("A",6666,R.drawable.tx);
             friendsList.add(fA);
-            Friends fB=new Friends("B",R.drawable.tx);
+            Friends fB=new Friends("B",6666,R.drawable.tx);
             friendsList.add(fB);
-            Friends fC=new Friends("C",R.drawable.tx);
+            Friends fC=new Friends("C",6666,R.drawable.tx);
             friendsList.add(fC);
-            Friends fD=new Friends("D",R.drawable.tx);
+            Friends fD=new Friends("D",6666,R.drawable.tx);
             friendsList.add(fD);
         }
     }
