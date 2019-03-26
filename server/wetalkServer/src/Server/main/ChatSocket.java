@@ -240,7 +240,7 @@ public class ChatSocket extends Thread{
     		userID = Integer.parseInt(matcher.group(1));
     	}
     	String out = null;
-    	String sql = "SELECT DISTINCT receiveID FROM `chatmsgs` WHERE senderID = '" + userID + "';";
+    	String sql = "SELECT DISTINCT receiveID FROM `chatmsgs` WHERE senderID = " + userID + " UNION SELECT DISTINCT senderID FROM `chatmsgs` WHERE receiveID = " + userID;
     	try {
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(sql);
