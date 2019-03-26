@@ -47,6 +47,7 @@ public class Login extends AppCompatActivity {
                     SharedPreferences.Editor editor=getSharedPreferences("chatInfo",MODE_PRIVATE).edit();
                     editor.putInt("userID",userID);
                     editor.apply();
+                    serverManager.setUserID(userID);
                     Intent intent=new Intent(Login.this,MainActivity.class);
                     startActivity(intent);
                 }else{

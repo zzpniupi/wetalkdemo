@@ -16,6 +16,7 @@ public class ChatManager {
 		
 	public void add(SocketMsg cs) {
 		socketList.add(cs);
+		System.out.println("socketList size is: "+socketList.size());
 	}
 	
 	public void remove(SocketMsg cs) {

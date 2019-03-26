@@ -3,21 +3,21 @@ package Server.main;
 public class SocketMsg {
 
 	private ChatSocket chatSocket;
-	private String username;
+	private int userID;
 	
-	public SocketMsg(ChatSocket chatSocket, String username) {
+	public SocketMsg(ChatSocket chatSocket, int userID) {
 		this.chatSocket = chatSocket;
-		this.username = username;
+		this.userID = userID;
 	}
 	
 
-	public String getUsername() {
-		return username;
+	public int getUserID() {
+		return userID;
 	}
 
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
 

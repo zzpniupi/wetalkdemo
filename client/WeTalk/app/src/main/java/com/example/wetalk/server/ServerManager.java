@@ -13,7 +13,7 @@ import java.net.Socket;
 public class ServerManager extends Thread {
     private static final String IP = "192.168.88.1";
     private Socket socket;
-    private String username;
+    private int userID;
     private int iconID;
     private String message = null;
     private BufferedReader bufferedReader;
@@ -42,7 +42,7 @@ public class ServerManager extends Thread {
                     m += line;
                 } else {
                     Log.d("TAG", "receive : " + m);
-                    if (ParaseData.getAction(m).equals("GETCHATMSG")) {
+                    if (ParaseData.getAction(m).equals("TRANSMSGS")) {
                         receiveChatMsg.delChatMsg(m);
                     } else {
                         message = m;
@@ -98,12 +98,12 @@ public class ServerManager extends Thread {
         this.message = message;
     }
 
-    public String getUsername() {
-        return username;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public int getIconID() {

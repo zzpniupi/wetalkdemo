@@ -1,6 +1,10 @@
 package com.example.wetalk.server;
 
+import android.os.Message;
+
 import com.example.wetalk.ChatMsg;
+import com.example.wetalk.Msg;
+import com.example.wetalk.activity.chatActivity;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,29 +18,26 @@ class ReceiveChatMsg {
         String avatarID = null;
         String fileType = null;
         String group = null;
+        String receiveMsg = null;
 
         ServerManager.getServerManager().setMessage(null);
-        String p = "\\[GETCHATMSG\\]:\\[(.*), (.*), (.*), (.*), (.*)\\]";
+        String p = "\\[TRANSMSGS\\]:\\[(.*), (.*), (.*)\\]";
         Pattern pattern = Pattern.compile(p);
         Matcher matcher = pattern.matcher(msg);
         if (matcher.find()) {
-            sendName = matcher.group(1);
-            content = matcher.group(2);
-            avatarID = matcher.group(3);
-            fileType = matcher.group(4);
-            group = matcher.group(5);
+            int senderID = Integer.parseInt(matcher.group(1));
+            if(senderID == chatActivity.friendID){
+                receiveMsg  = matcher.group(3);
+                Msg rMsg = new Msg(receiveMsg,0);
 
-            ChatMsg chatMsg = new ChatMsg();
-            chatMsg.setMyInfo(false);
-            chatMsg.setContent(content);
-            chatMsg.setChatObj(sendName);
-            chatMsg.setUsername(ServerManager.getServerManager().getUsername());
-            chatMsg.setGroup(group);
-
-            chatMsg.setIconID(Integer.parseInt(avatarID));
-
+                chatActivity.msgList.add(rMsg);
+                Message message = new Message();
+                message.what = 1;
+                chatActivity.handler.sendMessage(message);
+            }
+            //chatActivity.receiveMsgs(rMsg);
             //AtyChatRoom.chatMsgList.add(chatMsg);
-            ChatMsg.chatMsgList.add(chatMsg);
+            //ChatMsg.chatMsgList.add(receiveMsg);
         }
     }
 }
